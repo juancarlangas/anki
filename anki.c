@@ -2,26 +2,34 @@
 DE DATOS, CON LA OPCION DE LUEGO COMPARAR LAS RESPUESTAS SI SON CORRECTAS FINALIZAR EL PROGRAMA DE LO CONTRARIO SEGUIR INTENTANDO
 */
 
-
 #include<stdio.h>
 #include<string.h>
+/* Las definciones es mejor usar
+ * mayusculas. Ademas de crean
+ * mucho mas especificas, no usar
+ * palabras como LIMITE, que
+ * resultan poco exolicitas */
+#define MAX_LETRAS 50
+#define MAX_TARJETAS 50
 
-#define limite 50
-
-struct preguntas_nuevas{
-	char pregunt[limite];
-	char definicion[limite];
+/* Los nuevos tipos se acostumbra
+ * definirlos con mayúsculas al
+ * principio, ademas de usarse
+ * nombres en singular porque lo
+ * que se define es algo unitario*/
+struct Tarjeta {
+	char pregunta[MAX_LETRAS];
+	char definicion[MAX_LETRAS];
 };
 
-struct mazos
-{
-	char nombre[limite];
-	struct preguntas_nuevas preguntas[limite];
-}cantidad_mazos[limite];
+struct Mazo {
+	char nombre[MAX_LETRAS];
+	struct Tarjeta tarjeta[MAX_TARJETAS];
+} mazo[50];
 
 
-int mazos_existentes=0;
-int cont_preguntas=0;
+int mazos_existentes = 0;
+int cont_preguntas = 0;
 
 void mazo_nuevo();
 void mazos_exist();
