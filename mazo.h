@@ -1,3 +1,6 @@
+#ifndef MAZO_H
+#define MAZO_H
+
 /* Las definciones es mejor usar
  * mayusculas. Ademas de crean
  * mucho mas especificas, no usar
@@ -22,3 +25,10 @@ struct Mazo {
 	struct Tarjeta tarjeta[MAX_TARJETAS];
 	int n_tarjetas;
 };
+
+void crear_mazo();
+void imprimir_mazos();
+void adivinar();
+void ingresar_pregunta();
+
+#endif
