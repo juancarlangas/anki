@@ -4,40 +4,18 @@ DE DATOS, CON LA OPCION DE LUEGO COMPARAR LAS RESPUESTAS SI SON CORRECTAS FINALI
 
 #include<stdio.h>
 #include<string.h>
-/* Las definciones es mejor usar
- * mayusculas. Ademas de crean
- * mucho mas especificas, no usar
- * palabras como LIMITE, que
- * resultan poco exolicitas */
-#define MAX_LETRAS 50
-#define MAX_TARJETAS 50
 
-/* Los nuevos tipos se acostumbra
- * definirlos con mayúsculas al
- * principio, ademas de usarse
- * nombres en singular porque lo
- * que se define es algo unitario*/
-struct Tarjeta {
-	char pregunta[MAX_LETRAS];
-	char definicion[MAX_LETRAS];
-};
-
-struct Mazo {
-	char nombre[MAX_LETRAS];
-	struct Tarjeta tarjeta[MAX_TARJETAS];
-} mazo[50];
-
-
-int mazos_existentes = 0;
+int mazos_creados = 0;
 int cont_preguntas = 0;
 
-void mazo_nuevo();
-void mazos_exist();
+void crear_mazo();
+void imprimir_mazos();
 void adivinar();
 void ingresar_pregunta();
+
 int main()
 {
-	int elec;
+	int eleccion;
 	char vol;
 		do{
 		printf("**************************************\n");
@@ -48,27 +26,28 @@ int main()
 		printf("[3]ADIVINAR\n");
 		printf("[4]INGRESAR PREGUNTA\n");
 		printf("[5]SALIR\n");
+
 		printf("DIGITE LA OPCION:  ");
-		scanf("%i",&elec);
+		scanf( "%i",&eleccion );
+		getchar(); //clean
 
-		switch (elec){
-
+		switch ( eleccion ) {
 			case 1:
-				if (mazos_existentes<limite)
-					getchar();
-					mazo_nuevo();
+				if ( mazos_creados < MAX_MAZOS )
+					crear_mazo();
 					break;
+
 			case 2:
-				getchar();
-				mazos_exist();
+				imprimir_mazos();
 				break;
+
 			case 3:					//AQUI FALTA CONTINUAR CON ADIVINAR Y RESPUESTA
 				adivinar();					//AGREGAR CUANTAS TARJETAS HAZ ESTUDIADO
 				break;
+
 			case 4:
-				if(mazos_existentes>0){
+				if( mazos_creados >0 ) {
 				printf("\n HAZ SELECCIONADO INGRESAR PREGUNTA");
-					mazos_exist();
 					ingresar_pregunta();	
 				}else 
 				printf("TODAVIA NO HAY MAZOS!!!!");
@@ -85,31 +64,36 @@ int main()
 		
 }
 
-void mazo_nuevo(){
+void crear_mazo()
+{
 		printf("POR FAVOR INGRESE EL NOMBRE DEL NUEVO MAZO: ");
-		fgets(cantidad_mazos[mazos_existentes].nombre,limite,stdin);
-		mazos_existentes++;
+		fgets( mazo[mazos_creados].nombre, MAX_LETRAS, stdin);
+		++mazos_creados;
 }
 
-void mazos_exist(){
-	printf("\nCANTIDAD DE MAZOS EXISTENTES: %i",mazos_existentes);
+void imprimir_mazos()
+{
+	printf("\nCANTIDAD DE MAZOS EXISTENTES: %i", mazos_creados );
 	printf("\nNOMBRE DE LOS MAZOS: ");
-		for (int i = 0; i < mazos_existentes; i++)
+		for (int i = 0; i < mazos_creados; ++i )
 			{
-				printf("\n%i.- %s",i+1,cantidad_mazos[i].nombre);
+				printf("\n%i.- %s",i+1, mazo[i].nombre );
 			}
 
 }
 
-void adivinar(){
+void adivinar()
+{
 //FUNCION AUN NO CREADA
 }
 
-void ingresar_pregunta(int a){
+void ingresar_pregunta( int a )
+{
 	printf("\nPOR FAVOR INGRESE EL NUMERO DE MAZO A ELEGIR PARA LA PREGUNTA: ");
-	scanf("%i",&a);
-	printf("\nHAZ SELECCIONADO EL MAZO: %s",cantidad_mazos[a-1].nombre);
+	scanf( "%i",&a );
+	getchar();
+	printf("\nHAZ SELECCIONADO EL MAZO: %s", mazo[ a - 1 ].nombre);
 	printf("\n POR FAVOR INGRESE LA PREGUNTA: ");
-	fgets(cantidad_mazos[mazos_existentes].preguntas[cont_preguntas].pregunt,limite,stdin);
+	fgets( mazo[mazos_creados].pregunta[cont_preguntas].pregunt,limite,stdin);
 	cont_preguntas++;
 }
