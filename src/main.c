@@ -1,25 +1,26 @@
-/*PROGRAMA QUE SIMULA LA APLICACION ANKI, CON LA OPCION DE DIGITAR Y ALMACENAR NUESTRAS PREGUNTAS Y RESPUESTAS DENTRO DE UNA ESTRUCTURA 
-DE DATOS, CON LA OPCION DE LUEGO COMPARAR LAS RESPUESTAS SI SON CORRECTAS FINALIZAR EL PROGRAMA DE LO CONTRARIO SEGUIR INTENTANDO
-*/
-
 #include<stdio.h>
 #include<string.h>
 
-#include "mazo.h" // incluimos prototipos
+// incluimos prototipos movidos a mazo.h en la misma carpeta
+#include "mazo.h" 
 
-int main()
+// usamos el alias int32_t como buena practica para que el compilador escoja el tipo de int garantizando que el numero de bits sera constante (Win, Mac, Linux, etc)
+int32_t main()
 {
+	// ahora el arreglo maxo[] sera local
 	struct Mazo mazo[ MAX_MAZOS ]; // creamos
 
-	int mazos_creados = 0;
-	int cont_preguntas = 0;
+	// tambien locales
+	int32_t mazos_creados = 0;
+	int32_t cont_preguntas = 0;
 
-	int eleccion;
+	int32_t eleccion;
 	char vol;
+
 		do{
-		printf("**************************************\n");
-		printf("BIENVENIDO A ANKI ESTE ES EL MENU:\n");
-		printf("**************************************\n");
+		printf("***************************\n");
+		printf("BIENVENIDO A ANKI\n");
+		printf("***************************\n");
 		printf("[1]CREAR UN MAZO NUEVO\n");
 		printf("[2]VER MAZOS EXISTENTES\n");
 		printf("[3]ADIVINAR\n");
@@ -33,21 +34,19 @@ int main()
 		switch ( eleccion ) {
 			case 1:
 				if ( mazos_creados < MAX_MAZOS )
-					crear_mazo();
+					crear_mazo( mazo, &mazos_creados);
 					break;
-
 			case 2:
-				imprimir_mazos();
+				imprimir_mazos( mazo,mazos_creados);
 				break;
-
-			case 3:					//AQUI FALTA CONTINUAR CON ADIVINAR Y RESPUESTA
-				adivinar();					//AGREGAR CUANTAS TARJETAS HAZ ESTUDIADO
+			case 3:
+				adivinar();
 				break;
-
 			case 4:
-				if( mazos_creados >0 ) {
+				if( mazos_creados > 0 ) {
 				printf("\n HAZ SELECCIONADO INGRESAR PREGUNTA");
-					ingresar_pregunta();	
+					ingresar_pregunta(
+							mazo, &mazos_creados );	
 				}else 
 				printf("TODAVIA NO HAY MAZOS!!!!");
 				break;
