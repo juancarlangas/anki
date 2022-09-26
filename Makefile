@@ -1,8 +1,11 @@
-anki: anki.o
-	gcc anki.o -o anki
+anki: main.o mazo.o
+	gcc build/main.o build/mazo.o -o bin/anki
 
-anki.o: anki.c
-	gcc -c anki.c -o anki.o
+main.o: src/main.c src/mazo.h
+	gcc -c src/main.c -o build/main.o
+
+mazo.o: src/mazo.c src/mazo.h
+	gcc -c src/mazo.c -o build/mazo.o
 
 clean:
-	rm anki.o
+	rm build/main.o build/mazo.o
