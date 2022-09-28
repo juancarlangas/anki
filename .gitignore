@@ -1,4 +1,2 @@
-anki
-anki.o
-build/
-bin/
+build/*
+bin/*
