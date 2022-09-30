@@ -44,9 +44,9 @@ struct Mazo {
 	int32_t n_tarjetas;
 };
 
-void crear_mazo( struct Mazo *_MazoPtr, int32_t *_MazosCreados );
-void imprimir_mazos( struct Mazo *_MazoPtr, int32_t _MazosCreados );
+void crear_mazo( struct Mazo _Mazo[], int32_t *_MazosCreados );
+void imprimir_mazos( struct Mazo _Mazo[], int32_t _MazosCreados );
 void adivinar();
-void ingresar_pregunta( struct Mazo *_MazoPtr, const int32_t *_MazosCreadosPtr );
+void ingresar_pregunta( struct Mazo _Mazo[], const int32_t *_MazosCreadosPtr );
 
 #endif

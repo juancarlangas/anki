@@ -15,7 +15,6 @@ int32_t main()
 
 	// tambien locales
 	int32_t mazos_creados = 0;
-	int32_t cont_preguntas = 0;
 
 	int32_t eleccion;
 	char vol;
